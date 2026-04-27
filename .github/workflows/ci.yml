@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main, dev]
+  push:
+    branches: [main, dev]
+
+jobs:
+  quality:
+    name: Quality Checks
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Type check
+        run: pnpm typecheck
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Test
+        run: pnpm test --if-present
+        # --if-present 表示没有 test script 就跳过,不会失败
+
+      - name: Build
+        run: pnpm build
+        env:
+          # Build 时需要的环境变量,真实值不重要,有值就行
+          NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID: dummy_project_id_for_ci
+          NEXT_PUBLIC_APP_NAME: CI Build
+          NEXT_PUBLIC_ENABLE_TESTNETS: true
