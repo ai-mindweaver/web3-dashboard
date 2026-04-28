@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Skill(update-config)",
+      "Bash(git checkout *)",
+      "Bash(pnpm create *)",
+      "Bash(mkdir /tmp/web3-dash-backup)",
+      "Bash(mv .env.example CLAUDE.md README.md /tmp/web3-dash-backup/)",
+      "Bash(mv .github /tmp/web3-dash-backup/)",
+      "Bash(mv /tmp/web3-dash-backup/.env.example /tmp/web3-dash-backup/CLAUDE.md /tmp/web3-dash-backup/README.md .)",
+      "Bash(mv /tmp/web3-dash-backup/.github .)"
+    ]
+  }
+}
