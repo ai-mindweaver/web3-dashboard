@@ -1,34 +1,38 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
 # dependencies
-node_modules
-.pnp
-.pnp.js
-.yarn/install-state.gz
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
 
 # testing
-coverage
+/coverage
 
 # next.js
-.next/
-out/
-build
-dist
+/.next/
+/out/
 
 # production
-*.tsbuildinfo
-next-env.d.ts
+/build
 
-# env files (keep .env.example tracked)
-.env
-.env.local
-.env*.local
-.env.development
-.env.production
+# misc
+.DS_Store
+*.pem
 
 # debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
+
+# env files (keep .env.example tracked)
+.env*
+!.env.example
 
 # editors
 .vscode/*
@@ -39,7 +43,6 @@ yarn-error.log*
 .idea
 
 # OS
-.DS_Store
 Thumbs.db
 
 # vercel
@@ -47,3 +50,4 @@ Thumbs.db
 
 # typescript
 *.tsbuildinfo
+next-env.d.ts

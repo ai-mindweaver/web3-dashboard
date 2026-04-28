@@ -11,7 +11,7 @@
 
 ## 技术栈
 
-- **框架**: Next.js 14+ (App Router)
+- **框架**: Next.js 16+ (App Router)
 - **语言**: TypeScript 5+ (strict mode)
 - **样式**: Tailwind CSS 3+
 - **类名合并**: classnames(通过 `src/lib/cn.ts` 封装)
@@ -104,13 +104,15 @@ src/
 ### React / Next.js
 
 - **组件用 function 声明**,不用箭头函数:
+
   ```tsx
   // ✅ 推荐
   export function Button(props: ButtonProps) { ... }
-  
+
   // ❌ 不推荐
   export const Button = (props: ButtonProps) => { ... }
   ```
+
 - **明确区分 Server Component 和 Client Component**:
   - 使用 wagmi hook / Radix / 用户交互的组件必须是 Client(`"use client"` 开头)
   - 纯展示、纯数据的可以是 Server Component
@@ -121,16 +123,20 @@ src/
 ### Tailwind + classnames
 
 - **类名合并统一用 `cn()`**(来自 `src/lib/cn.ts`):
+
   ```tsx
-  import { cn } from '@/lib/cn'
-  
-  <button className={cn(
-    'px-4 py-2 rounded-md',
-    'bg-primary-500 text-white',
-    'hover:bg-primary-600',
-    className  // 允许外部覆盖
-  )} />
+  import { cn } from "@/lib/cn";
+
+  <button
+    className={cn(
+      "px-4 py-2 rounded-md",
+      "bg-primary-500 text-white",
+      "hover:bg-primary-600",
+      className, // 允许外部覆盖
+    )}
+  />;
   ```
+
 - **深浅色用 `dark:` 变体**,不要用 JS 条件渲染
 - **复杂 variant 抽成独立函数**,不要堆在 className 里
 - **响应式断点**: `sm:` (640px) / `md:` (768px) / `lg:` (1024px) / `xl:` (1280px)
@@ -148,15 +154,15 @@ src/
 
 ### wagmi v2 的 API(不要搞错)
 
-| v1 (过时) | v2 (当前) |
-|-----------|-----------|
-| `useContractRead` | `useReadContract` |
-| `useContractWrite` | `useWriteContract` |
-| `useContractReads` | `useReadContracts` |
-| `useContractEvent` | `useWatchContractEvent` |
+| v1 (过时)                 | v2 (当前)                           |
+| ------------------------- | ----------------------------------- |
+| `useContractRead`         | `useReadContract`                   |
+| `useContractWrite`        | `useWriteContract`                  |
+| `useContractReads`        | `useReadContracts`                  |
+| `useContractEvent`        | `useWatchContractEvent`             |
 | `usePrepareContractWrite` | ❌ 已移除,直接用 `useWriteContract` |
-| `WagmiConfig` | `WagmiProvider` |
-| `configureChains` | ❌ 已移除 |
+| `WagmiConfig`             | `WagmiProvider`                     |
+| `configureChains`         | ❌ 已移除                           |
 
 **如果你不确定某个 API 是 v1 还是 v2,查 https://wagmi.sh/react/api/hooks**
 
@@ -237,12 +243,12 @@ pnpm typecheck && pnpm lint && pnpm build
 
 所有环境变量必须在 `.env.example` 里列出,并写注释说明用途。客户端可访问的变量必须以 `NEXT_PUBLIC_` 开头。
 
-| 变量 | 必填 | 说明 |
-|------|------|------|
-| `NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID` | 是 | WalletConnect Project ID,https://cloud.walletconnect.com 申请 |
-| `NEXT_PUBLIC_APP_NAME` | 是 | 应用名字,显示在钱包连接弹窗 |
-| `NEXT_PUBLIC_ENABLE_TESTNETS` | 否 | `true` / `false`,是否启用测试网 |
-| `NEXT_PUBLIC_ALCHEMY_API_KEY` | 否 | 用自己的 RPC,不填用公共节点(被限流) |
+| 变量                                    | 必填 | 说明                                                          |
+| --------------------------------------- | ---- | ------------------------------------------------------------- |
+| `NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID` | 是   | WalletConnect Project ID,https://cloud.walletconnect.com 申请 |
+| `NEXT_PUBLIC_APP_NAME`                  | 是   | 应用名字,显示在钱包连接弹窗                                   |
+| `NEXT_PUBLIC_ENABLE_TESTNETS`           | 否   | `true` / `false`,是否启用测试网                               |
+| `NEXT_PUBLIC_ALCHEMY_API_KEY`           | 否   | 用自己的 RPC,不填用公共节点(被限流)                           |
 
 ## Git 约定
 
@@ -269,6 +275,7 @@ pnpm typecheck && pnpm lint && pnpm build
 ## 文档维护
 
 本文档是"活文档",随项目发展而更新:
+
 - 发现新的约定 → 立刻加进来
 - 某条规则不再适用 → 删掉或修改
 - Claude 反复犯同类错 → 说明这里的规则不够具体,要补
