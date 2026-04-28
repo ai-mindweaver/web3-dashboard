@@ -8,8 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
-    "test": "vitest",
-    "test:watch": "vitest --watch",
+    "test": "vitest --run --passWithNoTests",
+    "test:watch": "vitest",
     "lint:fix": "eslint --fix"
   },
   "dependencies": {
@@ -28,16 +28,22 @@
     "wagmi": "^2.19.5"
   },
   "pnpm": {
-    "ignoredBuiltDependencies": ["sharp", "unrs-resolver"]
+    "ignoredBuiltDependencies": [
+      "sharp",
+      "unrs-resolver"
+    ]
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/react": "^16.3.2",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.4",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^4.1.5"
   }
 }
